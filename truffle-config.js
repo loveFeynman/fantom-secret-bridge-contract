@@ -56,13 +56,14 @@
    networks: {
      // https://rpc-mumbai.maticvigil.com
      // https://matic-mumbai.chainstacklabs.com/
-     contracts_directory: './src/contracts/',
+     contracts_directory: './contracts/',
      contracts_build_directory: './src/abis/',
      testnet: {
        provider: () => new HDWalletProvider(memonics, "https://rpc.testnet.fantom.network"),
        network_id: 4002,
+       networkCheckTimeout: 10000,
        confirmations: 5,
-       timeoutBlocks: 2000000,
+       timeoutBlocks: 200,
        // networkCheckTimeout: 10000000,
        skipDryRun: true,
      },

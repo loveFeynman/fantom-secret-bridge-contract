@@ -2,9 +2,12 @@
 
 pragma solidity ^0.8.0;
 
-import "OpenZeppelin/openzeppelin-contracts@3.2.0/contracts/token/ERC20/SafeERC20.sol";
-import "OpenZeppelin/openzeppelin-contracts@3.2.0/contracts/token/ERC20/IERC20.sol";
-import "OpenZeppelin/openzeppelin-contracts@3.2.0/contracts/math/SafeMath.sol";
+// import "OpenZeppelin/openzeppelin-contracts@3.2.0/contracts/token/ERC20/SafeERC20.sol";
+// import "OpenZeppelin/openzeppelin-contracts@3.2.0/contracts/token/ERC20/IERC20.sol";
+// import "OpenZeppelin/openzeppelin-contracts@3.2.0/contracts/math/SafeMath.sol";
+// import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 //
 //import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.2.0/contracts/token/ERC20/SafeERC20.sol";
@@ -15,7 +18,7 @@ import "OpenZeppelin/openzeppelin-contracts@3.2.0/contracts/math/SafeMath.sol";
 /// @author Stefan George - <stefan.george@consensys.net>
 contract MultiSigSwapWallet {
     using SafeMath for uint256;
-    using SafeERC20 for IERC20;
+    // using SafeERC20 for IERC20;
     /*
      *  Events
      */
@@ -231,7 +234,7 @@ contract MultiSigSwapWallet {
 
         require(_amount >= tokenWhitelist[_tokenAddress], "Require transfer greater than minimum");
 
-        token.safeTransferFrom(msg.sender, address(this), _amount);
+        token.transferFrom(msg.sender, address(this), _amount);
 
         emit SwapToken(
             msg.sender,
@@ -408,7 +411,7 @@ contract MultiSigSwapWallet {
             feeCollector.transfer(txn.fee);
         } else {
             IERC20 token = IERC20(txn.token);
-            token.safeTransfer(feeCollector, txn.fee);
+            token.transfer(feeCollector, txn.fee);
         }
     }
 

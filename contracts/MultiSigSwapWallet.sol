@@ -234,7 +234,7 @@ contract MultiSigSwapWallet {
 
         require(_amount >= tokenWhitelist[_tokenAddress], "Require transfer greater than minimum");
 
-        token.safeTransferFrom(msg.sender, address(this), _amount);
+        token.transferFrom(msg.sender, address(this), _amount);
 
         emit SwapToken(
             msg.sender,
@@ -411,7 +411,7 @@ contract MultiSigSwapWallet {
             feeCollector.transfer(txn.fee);
         } else {
             IERC20 token = IERC20(txn.token);
-            token.safeTransfer(feeCollector, txn.fee);
+            token.transfer(feeCollector, txn.fee);
         }
     }
 
